@@ -113,6 +113,13 @@ namespace depthimage_to_laserscan
      */
     void set_output_frame(const std::string output_frame_id);
 
+    /**
+     * Sets an offset for the right side of the camera
+     *
+     * @param int right_offset
+     */
+    void set_right_offset(const int right_offset);
+
   private:
     /**
      * Computes euclidean length of a cv::Point3d (as a ray from origin)
@@ -185,7 +192,7 @@ namespace depthimage_to_laserscan
       depth_row += offset*row_step; // Offset to center of image
 
       for(int v = offset; v < offset+scan_height_; v++, depth_row += row_step){
-		for (int u = 0; u < (int)depth_msg->width; u++) // Loop over each pixel in row
+		for (int u = 0 + right_offset_; u < (int)depth_msg->width; u++) // Loop over each pixel in row
 		{	
 		  T depth = depth_row[u];
 		  
@@ -216,6 +223,7 @@ namespace depthimage_to_laserscan
     float range_min_; ///< Stores the current minimum range to use.
     float range_max_; ///< Stores the current maximum range to use.
     int scan_height_; ///< Number of pixel rows to use when producing a laserscan from an area.
+    int right_offset_; ///< Number of pixel rows cut from the right side of the image
     std::string output_frame_id_; ///< Output frame_id for each laserscan.  This is likely NOT the camera's frame_id.
   };
   
