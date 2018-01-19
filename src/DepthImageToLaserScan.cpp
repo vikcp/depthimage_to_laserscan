@@ -161,6 +161,6 @@ void DepthImageToLaserScan::set_output_frame(const std::string output_frame_id){
   output_frame_id_ = output_frame_id;
 }
 
-void DepthImageToLaserScan::set_right_offset(const int right_offset){
-    right_offset_ = right_offset;
+void DepthImageToLaserScan::set_left_offset(const int left_offset){
+    left_offset_ = left_offset;
 }
